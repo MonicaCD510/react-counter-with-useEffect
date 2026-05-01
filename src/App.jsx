@@ -17,6 +17,11 @@ function App() {
     setHistory([...history, newCount]);
   };
 
+  const handleReset = () => {
+    setCount(0);
+    setHistory([0]);
+  };
+
   return (
     <div>
       <h1>Counter</h1>
@@ -29,10 +34,12 @@ function App() {
         onChange={(e) => setStep(Number(e.target.value))}
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <button onClick={handleDecrement}>Decrement</button>
       <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleReset}>Reset</button>
 
       <h3>History:</h3>
       <p>{history.join(", ")}</p>
