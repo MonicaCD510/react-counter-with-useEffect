@@ -14,6 +14,28 @@ function App() {
     return () => clearTimeout(saveTimer);
   }, [count]);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "ArrowUp") {
+        const newCount = count + step;
+        setCount(newCount);
+        setHistory((prev) => [...prev, newCount]);
+      }
+
+      if (e.key === "ArrowDown") {
+        const newCount = count - step;
+        setCount(newCount);
+        setHistory((prev) => [...prev, newCount]);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [count, step]);
+
   const handleIncrement = () => {
     const newCount = count + step;
     setCount(newCount);
