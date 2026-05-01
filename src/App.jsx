@@ -3,6 +3,19 @@ import { useState } from "react";
 function App() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
+  const [history, setHistory] = useState([0]);
+
+  const handleIncrement = () => {
+    const newCount = count + step;
+    setCount(newCount);
+    setHistory([...history, newCount]);
+  };
+
+  const handleDecrement = () => {
+    const newCount = count - step;
+    setCount(newCount);
+    setHistory([...history, newCount]);
+  };
 
   return (
     <div>
@@ -16,11 +29,13 @@ function App() {
         onChange={(e) => setStep(Number(e.target.value))}
       />
 
-      <br />
-      <br />
+      <br /><br />
 
-      <button onClick={() => setCount(count - step)}>Decrement</button>
-      <button onClick={() => setCount(count + step)}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
+      <button onClick={handleIncrement}>Increment</button>
+
+      <h3>History:</h3>
+      <p>{history.join(", ")}</p>
     </div>
   );
 }
