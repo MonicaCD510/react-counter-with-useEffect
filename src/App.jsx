@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
   const [history, setHistory] = useState([0]);
+
+  useEffect(() => {
+    const saveTimer = setTimeout(() => {
+      localStorage.setItem("counterValue", count);
+      console.log("Count saved:", count);
+    }, 500);
+
+    return () => clearTimeout(saveTimer);
+  }, [count]);
 
   const handleIncrement = () => {
     const newCount = count + step;
